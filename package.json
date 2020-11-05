@@ -7,16 +7,11 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Michiel Mulders",
+  "author": "Bakonyi Gergõ",
   "license": "ISC",
   "dependencies": {
     "discord.js": "12.4.1",
     "dotenv": "^8.2.0",
-    "encoding": "^0.1.13",
-    "mongoose": "^5.10.11",
-    "utf8": "^3.0.0"
-  },
-  "optionalDependencies": {
-    "bufferutil": "^4.0.2"
+    "mongoose": "^5.10.11"
   }
 }

@@ -3,15 +3,13 @@ require('dotenv').config();
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
-const utf8 = require('utf8');
-var encoding = require("encoding");
 
 const mongoose = require("mongoose");
-const DiscordUser = require("../discord-bot-sitepoint/persistence/model/user");
+const DiscordUser = require("../NJSZKBOt/persistence/model/user");
 
-bot.login("NzczNjQ5MzQyOTMzODkzMTIx.X6MTGQ.ieBRLuTfwcgYa9PWPJnzYJg7F5o");
+bot.login(TOKEN);
 mongoose.connect(
-    "mongodb+srv://discord_ops:discord_ops@cluster0.dyryj.mongodb.net/indekusu_bot?retryWrites=true&w=majority",
+    `mongodb+srv://${process.env.MONGODB_USR}:${process.env.MONGODB_PW}@cluster0.dyryj.mongodb.net/${process.env.MONGODB_DB}?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true
     }
@@ -35,7 +33,7 @@ bot.on('message', msg => {
                     let newLvl = calculateLevel(discordUser.currentExp);
                     if (newLvl - previousLvl > 1) {
                         discordUser.currentLvl = Math.round(newLvl);
-                        msg.channel.send(`${msg.author} szintet lepett, szintje: ${discordUser.currentLvl}`);
+                        msg.channel.send(`${msg.author} has leveled up, current level: ${discordUser.currentLvl}`);
                     }
                 } else {
                     discordUser = createDiscordUser(msg.author.id);
@@ -47,12 +45,12 @@ bot.on('message', msg => {
     }
 
     if (msg.mentions.users.some(user => user.id == bot.user.id)) {
-        let quote = "Kedves" + `${msg.author}` + " Egyes fizikusok talan hatarozottan szubjektiv eloszeretettel viseltettek egyik vagy masik elmelet irant. De alig lehet ketseges, hogy a tudomanyos kozvelemeny vegul is csak azt a valtozatot fogja elfogadni, amely sikerrel mutatja az utat, szelesebb területeket tud meggyozobb erovel megmagyarazni.";
+        let quote = "Dear" + `${msg.author}` + process.env.NEUMANN_QUOTE;
         msg.reply(quote);
     }
 
 
-    if (msg.content.includes("#szint")) {
+    if (msg.content.includes("#szint") || msg.content.includes("#level")) {
         const query = DiscordUser.findOne({ tag: msg.author.id })
             .then(user =>
                 msg.reply(getEmbendForLevelQuery(msg.author.username, msg.author.displayAvatarURL(), user.currentLvl, user.currentExp))
@@ -89,18 +87,18 @@ function getEmbendForLevelQuery(userName, userAvatar, userLvl, userExp) {
 
     const exampleEmbed = new Discord.MessageEmbed()
         .setColor('#0099ff')
-        .setTitle(`${userName} szintje`)
+        .setTitle(`${userName} level data`)
         .setURL('http://njszk.uni-obuda.hu/')
         .setAuthor(`${userName}`, `${userAvatar}`, 'http://njszk.uni-obuda.hu/')
-        .setDescription("Szint adatok")
+        .setDescription("User experience and level data")
         .setThumbnail('http://njszk.uni-obuda.hu/wp-content/themes/njszk/sources/logo.png')
         .addFields(
-            { name: `${userName} szintje`, value: `${userLvl}`, inline: true },
-            { name: `${userName} tapasztalati pontjai`, value: `${userExp}`, inline: true },
+            { name: `${userName} level`, value: `${userLvl}`, inline: true },
+            { name: `${userName} experience points`, value: `${userExp}`, inline: true },
         )
         .setImage('http://njszk.uni-obuda.hu/wp-content/themes/njszk/sources/logo.png')
         .setTimestamp()
-        .setFooter('Készült az Óbudai Egyetem Neumann Jánosz Szakkollégiumában', 'http://njszk.uni-obuda.hu/wp-content/themes/njszk/sources/logo.png');
+        .setFooter('By Obuda University John von Neumann College for Advanced Studies', 'http://njszk.uni-obuda.hu/wp-content/themes/njszk/sources/logo.png');
 
     return exampleEmbed;
 }

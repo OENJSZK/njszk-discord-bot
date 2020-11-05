@@ -1,0 +1,3 @@
+D:\DEV\njszk-discord-bot\obj\Debug\NJSZKBot.njsprojAssemblyReference.cache
+D:\DEV\njszk-discord-bot\obj\Debug\NJSZKBot.njsproj.CoreCompileInputs.cache
+D:\DEV\njszk-discord-bot\bin\Microsoft.NodejsTools.WebRole.dll
