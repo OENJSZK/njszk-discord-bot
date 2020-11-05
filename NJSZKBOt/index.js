@@ -1,11 +1,11 @@
 /// <reference path="persistence/model/user.js" />
-require('dotenv').config();
+require('./node_modules/dotenv').config();
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 
 const mongoose = require("mongoose");
-const DiscordUser = require("../NJSZKBOt/persistence/model/user");
+const DiscordUser = require("./persistence/model/user");
 
 bot.login(TOKEN);
 mongoose.connect(
