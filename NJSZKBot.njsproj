@@ -6,7 +6,7 @@
     <ProjectGuid>{e59525b5-b19d-43b5-913c-7098b7b12f4b}</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>NJSZKBOt\index.js</StartupFile>
+    <StartupFile>index.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -20,14 +20,13 @@
     <Content Include="package.json" />
     <Content Include=".env" />
     <Content Include="README.md" />
-    <Content Include="NJSZKBOt\index.js" />
-    <Content Include="NJSZKBOt\persistence\model\user.js" />
+    <Content Include="index.js" />
+    <Content Include="persistence\model\user.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NJSZKBOt\persistence\" />
-    <Folder Include="NJSZKBOt" />
-    <Folder Include="NJSZKBOt\NJSZKBOt" />
-    <Folder Include="NJSZKBOt\persistence\model\" />
+    <Folder Include="model\" />
+    <Folder Include="persistence\" />
+    <Folder Include="persistence\model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
